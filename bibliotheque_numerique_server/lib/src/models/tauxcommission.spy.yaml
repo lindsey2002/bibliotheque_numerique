@@ -1,0 +1,8 @@
+class: TauxCommission
+table: taux_commission
+fields:
+  tauxPlateforme: double
+  montantParLectureUnique: double
+  seuilLecteursUniquesGratuit: int
+  dateDebut: DateTime, default=now
+  dateFin: DateTime?

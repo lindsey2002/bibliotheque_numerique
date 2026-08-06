@@ -1,0 +1,8 @@
+class: Utilisateur
+sealed: true
+fields:
+  nom: String
+  email: String
+  languePreferee: String?
+  dateCreation: DateTime, default=now
+  authUserId: UuidValue

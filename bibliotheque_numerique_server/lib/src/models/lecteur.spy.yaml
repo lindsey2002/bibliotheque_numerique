@@ -1,0 +1,9 @@
+class: Lecteur
+extends: Utilisateur
+table: lecteur
+fields:
+  essaiPremiumUtilise: bool, default=false
+indexes:
+  lecteur_authuserid_unique_idx:
+    fields: authUserId
+    unique: true

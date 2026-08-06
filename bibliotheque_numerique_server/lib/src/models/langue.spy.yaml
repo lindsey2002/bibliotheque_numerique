@@ -1,0 +1,12 @@
+class: Langue
+table: langue
+fields:
+  nom: String
+  code: String
+indexes:
+  langue_nom_unique_idx:
+    fields: nom
+    unique: true
+  langue_code_unique_idx:
+    fields: code
+    unique: true

@@ -1,0 +1,5 @@
+enum: StatutPrix
+serialized: byName
+values:
+  - gratuit
+  - payant

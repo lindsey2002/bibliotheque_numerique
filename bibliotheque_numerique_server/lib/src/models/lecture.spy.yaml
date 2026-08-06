@@ -1,0 +1,13 @@
+class: Lecture
+table: lecture
+fields:
+  datePremiereLecture: DateTime, default=now
+  pourcentageLu: int
+  moisAnnee: String
+  montantCommission: double?
+  lecteurId: int, relation(parent=lecteur)
+  livreId: int, relation(parent=livre)
+indexes:
+  lecture_unique_idx:
+    fields: lecteurId, livreId, moisAnnee
+    unique: true

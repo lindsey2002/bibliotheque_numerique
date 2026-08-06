@@ -1,0 +1,6 @@
+enum: ModeAudio
+serialized: byName
+values:
+  - aucun
+  - narrationIA
+  - ambianceSonore

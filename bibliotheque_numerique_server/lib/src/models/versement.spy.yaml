@@ -1,0 +1,13 @@
+class: Versement
+table: versement
+fields:
+  mois: String
+  montantBrut: double
+  montantNet: double
+  nbLecteursUniques: int
+  auteurId: int, relation(parent=auteur)
+  tauxId: int, relation(parent=taux_commission)
+indexes:
+  versement_unique_idx:
+    fields: auteurId, mois
+    unique: true

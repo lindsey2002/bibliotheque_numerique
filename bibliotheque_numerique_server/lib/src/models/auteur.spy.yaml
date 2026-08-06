@@ -1,0 +1,9 @@
+class: Auteur
+extends: Utilisateur
+table: auteur
+fields:
+  biographie: String?
+indexes:
+  auteur_authuserid_unique_idx:
+    fields: authUserId
+    unique: true

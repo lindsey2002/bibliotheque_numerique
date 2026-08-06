@@ -1,0 +1,12 @@
+class: Avis
+table: avis
+fields:
+  note: int
+  commentaire: String?
+  dateAvis: DateTime, default=now
+  lecteurId: int, relation(parent=lecteur)
+  livreId: int, relation(parent=livre)
+indexes:
+  avis_unique_idx:
+    fields: lecteurId, livreId
+    unique: true

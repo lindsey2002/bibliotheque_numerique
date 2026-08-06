@@ -1,0 +1,64 @@
+emailIdp:
+  - login:
+  - startRegistration:
+  - verifyRegistrationCode:
+  - finishRegistration:
+  - startPasswordReset:
+  - verifyPasswordResetCode:
+  - finishPasswordReset:
+  - hasAccount:
+jwtRefresh:
+  - refreshAccessToken:
+abonnement:
+  - souscrire:
+  - demarrerEssaiPremium:
+  - historique:
+acces:
+  - verifierAcces:
+ambianceSonore:
+  - creer:
+  - listerToutes:
+avis:
+  - laisser:
+avisPublic:
+  - avisDuLivre:
+categorie:
+  - creer:
+  - listerToutes:
+changementStatut:
+  - proposer:
+  - repondre:
+  - mesPropositionsEnAttente:
+configuration:
+  - definirTauxCommission:
+  - definirTarif:
+decision:
+  - listerEnAttente:
+  - valider:
+  - rejeter:
+  - resoumettre:
+favoris:
+  - ajouter:
+  - retirer:
+  - mesFavoris:
+langue:
+  - creer:
+  - listerToutes:
+lecture:
+  - enregistrer:
+  - compterLecteursUniquesDuMois:
+livre:
+  - soumettre:
+  - catalogue:
+  - monCatalogue:
+paiement:
+  - effectuer:
+profil:
+  - creerProfilLecteur:
+  - creerProfilAuteur:
+  - obtenirMonRole:
+statistiques:
+  - evolutionLecteursUniques:
+versement:
+  - genererPourLeMois:
+  - mesVersements:

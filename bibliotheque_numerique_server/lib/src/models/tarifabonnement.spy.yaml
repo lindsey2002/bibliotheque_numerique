@@ -1,0 +1,7 @@
+class: TarifAbonnement
+table: tarif_abonnement
+fields:
+  type: TypeAbonnement
+  prix: double
+  dateDebut: DateTime, default=now
+  dateFin: DateTime?

@@ -1,0 +1,13 @@
+class: Abonnement
+table: abonnement
+fields:
+  type: TypeAbonnement
+  dateDebut: DateTime, default=now
+  dateFin: DateTime?
+  prix: double
+  essaiPremiumActif: bool, default=false
+  dateFinEssaiPremium: DateTime?
+  lecteurId: int, relation(parent=lecteur)
+indexes:
+  abonnement_lecteur_idx:
+    fields: lecteurId

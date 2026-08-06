@@ -1,0 +1,4 @@
+class: ResultatAcces
+fields:
+  statut: String
+  pagesAutorisees: int?

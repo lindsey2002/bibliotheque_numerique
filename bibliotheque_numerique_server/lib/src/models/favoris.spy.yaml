@@ -1,0 +1,10 @@
+class: Favoris
+table: favoris
+fields:
+  dateAjout: DateTime, default=now
+  lecteurId: int, relation(parent=lecteur)
+  livreId: int, relation(parent=livre)
+indexes:
+  favoris_unique_idx:
+    fields: lecteurId, livreId
+    unique: true

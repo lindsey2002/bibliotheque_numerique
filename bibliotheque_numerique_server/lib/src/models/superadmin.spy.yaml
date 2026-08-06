@@ -1,0 +1,9 @@
+class: SuperAdmin
+extends: Utilisateur
+table: superadmin
+fields:
+  niveauAcces: String?
+indexes:
+  superadmin_authuserid_unique_idx:
+    fields: authUserId
+    unique: true

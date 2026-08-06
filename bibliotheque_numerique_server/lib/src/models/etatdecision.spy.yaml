@@ -1,0 +1,6 @@
+enum: EtatDecision
+serialized: byName
+values:
+  - enAttente
+  - valide
+  - refuse

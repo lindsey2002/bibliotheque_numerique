@@ -1,0 +1,14 @@
+class: ChangementStatut
+table: changement_statut
+fields:
+  ancienStatut: StatutPrix
+  nouveauStatut: StatutPrix
+  messageAdmin: String?
+  reponseAuteur: bool?
+  dateProposition: DateTime, default=now
+  dateReponse: DateTime?
+  livreId: int, relation(parent=livre)
+  auteurId: int, relation(parent=auteur)
+indexes:
+  changement_livre_idx:
+    fields: livreId

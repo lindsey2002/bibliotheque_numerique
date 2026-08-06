@@ -1,0 +1,11 @@
+class: Decision
+table: decision
+fields:
+  etat: EtatDecision, default=enAttente
+  justificationAuteur: String?
+  dateDecision: DateTime, default=now
+  livreId: int, relation(parent=livre)
+  superAdminId: int?, relation(parent=superadmin)
+indexes:
+  decision_livre_idx:
+    fields: livreId

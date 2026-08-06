@@ -1,0 +1,8 @@
+class: Categorie
+table: categorie
+fields:
+  nom: String
+indexes:
+  categorie_nom_unique_idx:
+    fields: nom
+    unique: true

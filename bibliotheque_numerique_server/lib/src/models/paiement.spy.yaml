@@ -1,0 +1,10 @@
+class: Paiement
+table: paiement
+fields:
+  montant: double
+  date: DateTime, default=now
+  mode: String
+  abonnementId: int, relation(parent=abonnement)
+indexes:
+  paiement_abonnement_idx:
+    fields: abonnementId

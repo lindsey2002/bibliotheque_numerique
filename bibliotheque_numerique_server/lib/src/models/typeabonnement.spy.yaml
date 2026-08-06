@@ -1,0 +1,5 @@
+enum: TypeAbonnement
+serialized: byName
+values:
+  - gratuit
+  - premium

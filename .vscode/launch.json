@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "bibliotheque_numerique_flutter",
+            "cwd": "${workspaceFolder}/bibliotheque_numerique_flutter",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "bibliotheque_numerique_server",
+            "cwd": "${workspaceFolder}/bibliotheque_numerique_server",
+            "request": "launch",
+            "type": "dart",
+            "preLaunchTask": "docker_compose_up",
+            "program": "bin/main.dart",
+            "env": {
+                "SERVERPOD_PASSWORD_database": "1qYv7MsP96Wfw5mFiChEQ3gUVXJR3oN-"
+            },
+            "args": [
+                "--apply-migrations"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "bibliotheque_numerique (full stack)",
+            "configurations": [
+                "bibliotheque_numerique_server",
+                "bibliotheque_numerique_flutter"
+            ],
+            "presentation": {
+                "order": 1
+            }
+        }
+    ]
+}

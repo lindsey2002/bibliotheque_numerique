@@ -1,0 +1,17 @@
+class: Livre
+table: livre
+fields:
+  titre: String
+  description: String?
+  dateSoumission: DateTime, default=now
+  modeAudio: ModeAudio, default=aucun
+  statutPrix: StatutPrix, default=gratuit
+  auteurId: int, relation(parent=auteur)
+  categorieId: int, relation(parent=categorie)
+  langueId: int, relation(parent=langue)
+  ambianceId: int?, relation(parent=ambiance_sonore)
+indexes:
+  livre_auteur_idx:
+    fields: auteurId
+  livre_categorie_idx:
+    fields: categorieId
