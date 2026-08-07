@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import '../generated/protocol.dart';
+import 'notification_endpoint.dart';
 
 class DecisionEndpoint extends Endpoint {
   @override
@@ -24,34 +25,60 @@ class DecisionEndpoint extends Endpoint {
   }
 
   Future<Decision> valider(Session session, int decisionId) async {
-    final superAdmin = await _verifierSuperAdmin(session);
+  final superAdmin = await _verifierSuperAdmin(session);
 
-    final decision = await Decision.db.findById(session, decisionId);
-    if (decision == null) throw Exception('Décision introuvable.');
-    if (decision.etat != EtatDecision.enAttente) {
-      throw Exception('Cette décision a déjà été traitée.');
-    }
-
-    decision.etat = EtatDecision.valide;
-    decision.superAdminId = superAdmin.id;
-    decision.dateDecision = DateTime.now();
-    return await Decision.db.updateRow(session, decision);
+  final decision = await Decision.db.findById(session, decisionId);
+  if (decision == null) throw Exception('Décision introuvable.');
+  if (decision.etat != EtatDecision.enAttente) {
+    throw Exception('Cette décision a déjà été traitée.');
   }
+
+  decision.etat = EtatDecision.valide;
+  decision.superAdminId = superAdmin.id;
+  decision.dateDecision = DateTime.now();
+  await Decision.db.updateRow(session, decision);
+
+  final livre = await Livre.db.findById(session, decision.livreId);
+  if (livre != null) {
+    await envoyerNotification(
+      session,
+      destinataireType: TypeDestinataire.auteur,
+      destinataireId: livre.auteurId,
+      titre: 'Ouvrage validé',
+      message: 'Votre ouvrage "${livre.titre}" a été validé.',
+    );
+  }
+
+  return decision;
+}
 
   Future<Decision> rejeter(Session session, int decisionId) async {
-    final superAdmin = await _verifierSuperAdmin(session);
+  final superAdmin = await _verifierSuperAdmin(session);
 
-    final decision = await Decision.db.findById(session, decisionId);
-    if (decision == null) throw Exception('Décision introuvable.');
-    if (decision.etat != EtatDecision.enAttente) {
-      throw Exception('Cette décision a déjà été traitée.');
-    }
-
-    decision.etat = EtatDecision.refuse;
-    decision.superAdminId = superAdmin.id;
-    decision.dateDecision = DateTime.now();
-    return await Decision.db.updateRow(session, decision);
+  final decision = await Decision.db.findById(session, decisionId);
+  if (decision == null) throw Exception('Décision introuvable.');
+  if (decision.etat != EtatDecision.enAttente) {
+    throw Exception('Cette décision a déjà été traitée.');
   }
+
+  decision.etat = EtatDecision.refuse;
+  decision.superAdminId = superAdmin.id;
+  decision.dateDecision = DateTime.now();
+  await Decision.db.updateRow(session, decision);
+
+  final livre = await Livre.db.findById(session, decision.livreId);
+  if (livre != null) {
+    await envoyerNotification(
+      session,
+      destinataireType: TypeDestinataire.auteur,
+      destinataireId: livre.auteurId,
+      titre: 'Ouvrage refusé',
+      message: 'Votre ouvrage "${livre.titre}" a été refusé.',
+    );
+  }
+
+  return decision;
+}
 
   Future<Decision> resoumettre(Session session, int livreId, String justification) async {
     final authUserId = UuidValue.fromString(session.authenticated!.userIdentifier);

@@ -1,0 +1,12 @@
+class: Notification
+table: notification
+fields:
+  titre: String
+  message: String
+  lu: bool, default=false
+  dateCreation: DateTime, default=now
+  destinataireType: TypeDestinataire
+  destinataireId: int
+indexes:
+  notification_destinataire_idx:
+    fields: destinataireType, destinataireId

@@ -51,6 +51,10 @@ livre:
   - soumettre:
   - catalogue:
   - monCatalogue:
+notification:
+  - mesNotifications:
+  - marquerCommeLue:
+  - ecouter:
 paiement:
   - effectuer:
 profil:

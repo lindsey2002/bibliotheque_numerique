@@ -26,20 +26,21 @@ import '../endpoints/favoris_endpoint.dart' as _i13;
 import '../endpoints/langue_endpoint.dart' as _i14;
 import '../endpoints/lecture_endpoint.dart' as _i15;
 import '../endpoints/livre_endpoint.dart' as _i16;
-import '../endpoints/paiement_endpoint.dart' as _i17;
-import '../endpoints/profil_endpoint.dart' as _i18;
-import '../endpoints/statistiques_endpoint.dart' as _i19;
-import '../endpoints/versement_endpoint.dart' as _i20;
+import '../endpoints/notification_endpoint.dart' as _i17;
+import '../endpoints/paiement_endpoint.dart' as _i18;
+import '../endpoints/profil_endpoint.dart' as _i19;
+import '../endpoints/statistiques_endpoint.dart' as _i20;
+import '../endpoints/versement_endpoint.dart' as _i21;
 import 'package:bibliotheque_numerique_server/src/generated/typeabonnement.dart'
-    as _i21;
-import 'package:bibliotheque_numerique_server/src/generated/statutprix.dart'
     as _i22;
-import 'package:bibliotheque_numerique_server/src/generated/modeaudio.dart'
+import 'package:bibliotheque_numerique_server/src/generated/statutprix.dart'
     as _i23;
-import 'package:serverpod_auth_idp_server/serverpod_auth_idp_server.dart'
+import 'package:bibliotheque_numerique_server/src/generated/modeaudio.dart'
     as _i24;
-import 'package:serverpod_auth_core_server/serverpod_auth_core_server.dart'
+import 'package:serverpod_auth_idp_server/serverpod_auth_idp_server.dart'
     as _i25;
+import 'package:serverpod_auth_core_server/serverpod_auth_core_server.dart'
+    as _i26;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -135,25 +136,31 @@ class Endpoints extends _i1.EndpointDispatch {
           'livre',
           null,
         ),
-      'paiement': _i17.PaiementEndpoint()
+      'notification': _i17.NotificationEndpoint()
+        ..initialize(
+          server,
+          'notification',
+          null,
+        ),
+      'paiement': _i18.PaiementEndpoint()
         ..initialize(
           server,
           'paiement',
           null,
         ),
-      'profil': _i18.ProfilEndpoint()
+      'profil': _i19.ProfilEndpoint()
         ..initialize(
           server,
           'profil',
           null,
         ),
-      'statistiques': _i19.StatistiquesEndpoint()
+      'statistiques': _i20.StatistiquesEndpoint()
         ..initialize(
           server,
           'statistiques',
           null,
         ),
-      'versement': _i20.VersementEndpoint()
+      'versement': _i21.VersementEndpoint()
         ..initialize(
           server,
           'versement',
@@ -373,7 +380,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'type': _i1.ParameterDescription(
               name: 'type',
-              type: _i1.getType<_i21.TypeAbonnement>(),
+              type: _i1.getType<_i22.TypeAbonnement>(),
               nullable: false,
             ),
           },
@@ -587,7 +594,7 @@ class Endpoints extends _i1.EndpointDispatch {
             ),
             'nouveauStatut': _i1.ParameterDescription(
               name: 'nouveauStatut',
-              type: _i1.getType<_i22.StatutPrix>(),
+              type: _i1.getType<_i23.StatutPrix>(),
               nullable: false,
             ),
             'messageAdmin': _i1.ParameterDescription(
@@ -694,7 +701,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'type': _i1.ParameterDescription(
               name: 'type',
-              type: _i1.getType<_i21.TypeAbonnement>(),
+              type: _i1.getType<_i22.TypeAbonnement>(),
               nullable: false,
             ),
             'prix': _i1.ParameterDescription(
@@ -973,7 +980,7 @@ class Endpoints extends _i1.EndpointDispatch {
             ),
             'modeAudio': _i1.ParameterDescription(
               name: 'modeAudio',
-              type: _i1.getType<_i23.ModeAudio>(),
+              type: _i1.getType<_i24.ModeAudio>(),
               nullable: false,
             ),
             'ambianceId': _i1.ParameterDescription(
@@ -1032,6 +1039,56 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['notification'] = _i1.EndpointConnector(
+      name: 'notification',
+      endpoint: endpoints['notification']!,
+      methodConnectors: {
+        'mesNotifications': _i1.MethodConnector(
+          name: 'mesNotifications',
+          params: {},
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async =>
+                  (endpoints['notification'] as _i17.NotificationEndpoint)
+                      .mesNotifications(session),
+        ),
+        'marquerCommeLue': _i1.MethodConnector(
+          name: 'marquerCommeLue',
+          params: {
+            'notificationId': _i1.ParameterDescription(
+              name: 'notificationId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+          },
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async =>
+                  (endpoints['notification'] as _i17.NotificationEndpoint)
+                      .marquerCommeLue(
+                        session,
+                        params['notificationId'],
+                      ),
+        ),
+        'ecouter': _i1.MethodStreamConnector(
+          name: 'ecouter',
+          params: {},
+          streamParams: {},
+          returnType: _i1.MethodStreamReturnType.streamType,
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['notification'] as _i17.NotificationEndpoint)
+                  .ecouter(session),
+        ),
+      },
+    );
     connectors['paiement'] = _i1.EndpointConnector(
       name: 'paiement',
       endpoint: endpoints['paiement']!,
@@ -1055,7 +1112,7 @@ class Endpoints extends _i1.EndpointDispatch {
                 _i1.Session session,
                 Map<String, dynamic> params,
               ) async =>
-                  (endpoints['paiement'] as _i17.PaiementEndpoint).effectuer(
+                  (endpoints['paiement'] as _i18.PaiementEndpoint).effectuer(
                     session,
                     params['abonnementId'],
                     params['mode'],
@@ -1090,7 +1147,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['profil'] as _i18.ProfilEndpoint)
+              ) async => (endpoints['profil'] as _i19.ProfilEndpoint)
                   .creerProfilLecteur(
                     session,
                     nom: params['nom'],
@@ -1126,7 +1183,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['profil'] as _i18.ProfilEndpoint)
+              ) async => (endpoints['profil'] as _i19.ProfilEndpoint)
                   .creerProfilAuteur(
                     session,
                     nom: params['nom'],
@@ -1142,7 +1199,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['profil'] as _i18.ProfilEndpoint)
+              ) async => (endpoints['profil'] as _i19.ProfilEndpoint)
                   .obtenirMonRole(session),
         ),
       },
@@ -1165,7 +1222,7 @@ class Endpoints extends _i1.EndpointDispatch {
                 _i1.Session session,
                 Map<String, dynamic> params,
               ) async =>
-                  (endpoints['statistiques'] as _i19.StatistiquesEndpoint)
+                  (endpoints['statistiques'] as _i20.StatistiquesEndpoint)
                       .evolutionLecteursUniques(
                         session,
                         params['livreId'],
@@ -1190,7 +1247,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['versement'] as _i20.VersementEndpoint)
+              ) async => (endpoints['versement'] as _i21.VersementEndpoint)
                   .genererPourLeMois(
                     session,
                     params['moisAnnee'],
@@ -1203,14 +1260,14 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['versement'] as _i20.VersementEndpoint)
+              ) async => (endpoints['versement'] as _i21.VersementEndpoint)
                   .mesVersements(session),
         ),
       },
     );
-    modules['serverpod_auth_idp'] = _i24.Endpoints()
+    modules['serverpod_auth_idp'] = _i25.Endpoints()
       ..initializeEndpoints(server);
-    modules['serverpod_auth_core'] = _i25.Endpoints()
+    modules['serverpod_auth_core'] = _i26.Endpoints()
       ..initializeEndpoints(server);
   }
 }

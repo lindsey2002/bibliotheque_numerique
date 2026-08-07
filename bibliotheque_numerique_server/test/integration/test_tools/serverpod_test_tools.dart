@@ -46,12 +46,14 @@ import 'package:bibliotheque_numerique_server/src/generated/lecture.dart'
     as _i19;
 import 'package:bibliotheque_numerique_server/src/generated/modeaudio.dart'
     as _i20;
-import 'package:bibliotheque_numerique_server/src/generated/paiement.dart'
+import 'package:bibliotheque_numerique_server/src/generated/notification.dart'
     as _i21;
-import 'package:bibliotheque_numerique_server/src/generated/utilisateur.dart'
+import 'package:bibliotheque_numerique_server/src/generated/paiement.dart'
     as _i22;
-import 'package:bibliotheque_numerique_server/src/generated/versement.dart'
+import 'package:bibliotheque_numerique_server/src/generated/utilisateur.dart'
     as _i23;
+import 'package:bibliotheque_numerique_server/src/generated/versement.dart'
+    as _i24;
 import 'package:bibliotheque_numerique_server/src/generated/protocol.dart';
 import 'package:bibliotheque_numerique_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -196,6 +198,8 @@ class TestEndpoints {
 
   late final _LivreEndpoint livre;
 
+  late final _NotificationEndpoint notification;
+
   late final _PaiementEndpoint paiement;
 
   late final _ProfilEndpoint profil;
@@ -269,6 +273,10 @@ class _InternalTestEndpoints extends TestEndpoints
       serializationManager,
     );
     livre = _LivreEndpoint(
+      endpoints,
+      serializationManager,
+    );
+    notification = _NotificationEndpoint(
       endpoints,
       serializationManager,
     );
@@ -1704,6 +1712,107 @@ class _LivreEndpoint {
   }
 }
 
+class _NotificationEndpoint {
+  _NotificationEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<List<_i21.Notification>> mesNotifications(
+    _i1.TestSessionBuilder sessionBuilder,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'notification',
+            method: 'mesNotifications',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'notification',
+          methodName: 'mesNotifications',
+          parameters: _i1.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<List<_i21.Notification>>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _i3.Future<void> marquerCommeLue(
+    _i1.TestSessionBuilder sessionBuilder,
+    int notificationId,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'notification',
+            method: 'marquerCommeLue',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'notification',
+          methodName: 'marquerCommeLue',
+          parameters: _i1.testObjectToJson({'notificationId': notificationId}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<void>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _i3.Stream<_i21.Notification> ecouter(_i1.TestSessionBuilder sessionBuilder) {
+    var _localTestStreamManager = _i1.TestStreamManager<_i21.Notification>();
+    _i1.callStreamFunctionAndHandleExceptions(
+      () async {
+        var _localUniqueSession =
+            (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+              endpoint: 'notification',
+              method: 'ecouter',
+            );
+        var _localCallContext = await _endpointDispatch
+            .getMethodStreamCallContext(
+              createSessionCallback: (_) => _localUniqueSession,
+              endpointPath: 'notification',
+              methodName: 'ecouter',
+              arguments: {},
+              requestedInputStreams: [],
+              serializationManager: _serializationManager,
+            );
+        await _localTestStreamManager.callStreamMethod(
+          _localCallContext,
+          _localUniqueSession,
+          {},
+        );
+      },
+      _localTestStreamManager.outputStreamController,
+    );
+    return _localTestStreamManager.outputStreamController.stream;
+  }
+}
+
 class _PaiementEndpoint {
   _PaiementEndpoint(
     this._endpointDispatch,
@@ -1714,7 +1823,7 @@ class _PaiementEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<_i21.Paiement> effectuer(
+  _i3.Future<_i22.Paiement> effectuer(
     _i1.TestSessionBuilder sessionBuilder,
     int abonnementId,
     String mode,
@@ -1741,7 +1850,7 @@ class _PaiementEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<_i21.Paiement>);
+                as _i3.Future<_i22.Paiement>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -1760,7 +1869,7 @@ class _ProfilEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<_i22.Lecteur> creerProfilLecteur(
+  _i3.Future<_i23.Lecteur> creerProfilLecteur(
     _i1.TestSessionBuilder sessionBuilder, {
     required String nom,
     required String email,
@@ -1789,7 +1898,7 @@ class _ProfilEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<_i22.Lecteur>);
+                as _i3.Future<_i23.Lecteur>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -1797,7 +1906,7 @@ class _ProfilEndpoint {
     });
   }
 
-  _i3.Future<_i22.Auteur> creerProfilAuteur(
+  _i3.Future<_i23.Auteur> creerProfilAuteur(
     _i1.TestSessionBuilder sessionBuilder, {
     required String nom,
     required String email,
@@ -1828,7 +1937,7 @@ class _ProfilEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<_i22.Auteur>);
+                as _i3.Future<_i23.Auteur>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -1919,7 +2028,7 @@ class _VersementEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<List<_i23.Versement>> genererPourLeMois(
+  _i3.Future<List<_i24.Versement>> genererPourLeMois(
     _i1.TestSessionBuilder sessionBuilder,
     String moisAnnee,
   ) async {
@@ -1942,7 +2051,7 @@ class _VersementEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<List<_i23.Versement>>);
+                as _i3.Future<List<_i24.Versement>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -1950,7 +2059,7 @@ class _VersementEndpoint {
     });
   }
 
-  _i3.Future<List<_i23.Versement>> mesVersements(
+  _i3.Future<List<_i24.Versement>> mesVersements(
     _i1.TestSessionBuilder sessionBuilder,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
@@ -1972,7 +2081,7 @@ class _VersementEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _i3.Future<List<_i23.Versement>>);
+                as _i3.Future<List<_i24.Versement>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

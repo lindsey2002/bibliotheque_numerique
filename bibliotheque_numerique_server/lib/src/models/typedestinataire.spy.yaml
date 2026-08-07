@@ -1,0 +1,6 @@
+enum: TypeDestinataire
+serialized: byName
+values:
+  - lecteur
+  - auteur
+  - superadmin
