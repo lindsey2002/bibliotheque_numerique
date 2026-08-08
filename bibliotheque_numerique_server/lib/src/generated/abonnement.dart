@@ -23,6 +23,7 @@ abstract class Abonnement
     required this.prix,
     bool? essaiPremiumActif,
     this.dateFinEssaiPremium,
+    this.dateProchainPaiement,
     required this.lecteurId,
   }) : dateDebut = dateDebut ?? DateTime.now(),
        essaiPremiumActif = essaiPremiumActif ?? false;
@@ -35,6 +36,7 @@ abstract class Abonnement
     required double prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     required int lecteurId,
   }) = _AbonnementImpl;
 
@@ -59,6 +61,11 @@ abstract class Abonnement
           : _i1.DateTimeJsonExtension.fromJson(
               jsonSerialization['dateFinEssaiPremium'],
             ),
+      dateProchainPaiement: jsonSerialization['dateProchainPaiement'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['dateProchainPaiement'],
+            ),
       lecteurId: jsonSerialization['lecteurId'] as int,
     );
   }
@@ -82,6 +89,8 @@ abstract class Abonnement
 
   DateTime? dateFinEssaiPremium;
 
+  DateTime? dateProchainPaiement;
+
   int lecteurId;
 
   @override
@@ -98,6 +107,7 @@ abstract class Abonnement
     double? prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     int? lecteurId,
   });
   @override
@@ -112,6 +122,8 @@ abstract class Abonnement
       'essaiPremiumActif': essaiPremiumActif,
       if (dateFinEssaiPremium != null)
         'dateFinEssaiPremium': dateFinEssaiPremium?.toJson(),
+      if (dateProchainPaiement != null)
+        'dateProchainPaiement': dateProchainPaiement?.toJson(),
       'lecteurId': lecteurId,
     };
   }
@@ -128,6 +140,8 @@ abstract class Abonnement
       'essaiPremiumActif': essaiPremiumActif,
       if (dateFinEssaiPremium != null)
         'dateFinEssaiPremium': dateFinEssaiPremium?.toJson(),
+      if (dateProchainPaiement != null)
+        'dateProchainPaiement': dateProchainPaiement?.toJson(),
       'lecteurId': lecteurId,
     };
   }
@@ -173,6 +187,7 @@ class _AbonnementImpl extends Abonnement {
     required double prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     required int lecteurId,
   }) : super._(
          id: id,
@@ -182,6 +197,7 @@ class _AbonnementImpl extends Abonnement {
          prix: prix,
          essaiPremiumActif: essaiPremiumActif,
          dateFinEssaiPremium: dateFinEssaiPremium,
+         dateProchainPaiement: dateProchainPaiement,
          lecteurId: lecteurId,
        );
 
@@ -197,6 +213,7 @@ class _AbonnementImpl extends Abonnement {
     double? prix,
     bool? essaiPremiumActif,
     Object? dateFinEssaiPremium = _Undefined,
+    Object? dateProchainPaiement = _Undefined,
     int? lecteurId,
   }) {
     return Abonnement(
@@ -209,6 +226,9 @@ class _AbonnementImpl extends Abonnement {
       dateFinEssaiPremium: dateFinEssaiPremium is DateTime?
           ? dateFinEssaiPremium
           : this.dateFinEssaiPremium,
+      dateProchainPaiement: dateProchainPaiement is DateTime?
+          ? dateProchainPaiement
+          : this.dateProchainPaiement,
       lecteurId: lecteurId ?? this.lecteurId,
     );
   }
@@ -252,6 +272,12 @@ class AbonnementUpdateTable extends _i1.UpdateTable<AbonnementTable> {
         value,
       );
 
+  _i1.ColumnValue<DateTime, DateTime> dateProchainPaiement(DateTime? value) =>
+      _i1.ColumnValue(
+        table.dateProchainPaiement,
+        value,
+      );
+
   _i1.ColumnValue<int, int> lecteurId(int value) => _i1.ColumnValue(
     table.lecteurId,
     value,
@@ -288,6 +314,10 @@ class AbonnementTable extends _i1.Table<int?> {
       'dateFinEssaiPremium',
       this,
     );
+    dateProchainPaiement = _i1.ColumnDateTime(
+      'dateProchainPaiement',
+      this,
+    );
     lecteurId = _i1.ColumnInt(
       'lecteurId',
       this,
@@ -308,6 +338,8 @@ class AbonnementTable extends _i1.Table<int?> {
 
   late final _i1.ColumnDateTime dateFinEssaiPremium;
 
+  late final _i1.ColumnDateTime dateProchainPaiement;
+
   late final _i1.ColumnInt lecteurId;
 
   @override
@@ -319,6 +351,7 @@ class AbonnementTable extends _i1.Table<int?> {
     prix,
     essaiPremiumActif,
     dateFinEssaiPremium,
+    dateProchainPaiement,
     lecteurId,
   ];
 }

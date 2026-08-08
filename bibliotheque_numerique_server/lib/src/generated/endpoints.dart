@@ -518,6 +518,30 @@ class Endpoints extends _i1.EndpointDispatch {
                 params['commentaire'],
               ),
         ),
+        'repondre': _i1.MethodConnector(
+          name: 'repondre',
+          params: {
+            'avisId': _i1.ParameterDescription(
+              name: 'avisId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'reponse': _i1.ParameterDescription(
+              name: 'reponse',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['avis'] as _i7.AvisEndpoint).repondre(
+                session,
+                params['avisId'],
+                params['reponse'],
+              ),
+        ),
       },
     );
     connectors['avisPublic'] = _i1.EndpointConnector(

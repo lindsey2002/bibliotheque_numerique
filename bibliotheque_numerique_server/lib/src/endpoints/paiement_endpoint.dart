@@ -18,13 +18,16 @@ class PaiementEndpoint extends Endpoint {
       throw Exception('Le palier Gratuit ne nécessite aucun paiement.');
     }
 
-    return await Paiement.db.insertRow(
-      session,
-      Paiement(
-        montant: abonnement.prix,
-        mode: mode,
-        abonnementId: abonnement.id!,
-      ),
-    );
+    final paiement = await Paiement.db.insertRow(
+  session,
+  Paiement(montant: abonnement.prix, mode: mode, abonnementId: abonnement.id!),
+);
+
+abonnement.dateProchainPaiement = DateTime.now().add(const Duration(days: 30));
+await Abonnement.db.updateRow(session, abonnement);
+
+return paiement;
+
+    
   }
 }

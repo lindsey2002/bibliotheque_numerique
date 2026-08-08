@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import '../generated/protocol.dart';
+import 'notification_endpoint.dart';
 
 class VersementEndpoint extends Endpoint {
   @override
@@ -65,6 +66,13 @@ class VersementEndpoint extends Endpoint {
           tauxId: taux.id!,
         ),
       ));
+      await envoyerNotification(
+  session,
+  destinataireType: TypeDestinataire.auteur,
+  destinataireId: auteur.id!,
+  titre: 'Versement disponible',
+  message: 'Votre versement de $moisAnnee (${montantNet.toStringAsFixed(0)}) est disponible.',
+);
     }
 
     return versements;

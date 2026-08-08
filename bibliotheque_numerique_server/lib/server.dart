@@ -8,6 +8,7 @@ import 'src/generated/endpoints.dart';
 import 'src/generated/protocol.dart';
 import 'src/web/routes/app_config_route.dart';
 import 'src/web/routes/root.dart';
+import 'src/future_calls/rappel_abonnement_future_call.dart';
 
 /// The starting point of the Serverpod server.
 void run(List<String> args) async {
@@ -72,6 +73,9 @@ void run(List<String> args) async {
       '/app/**',
     );
   }
+
+  pod.registerFutureCall(RappelAbonnementFutureCall(), 'rappelAbonnement');
+  await pod.futureCallWithDelay('rappelAbonnement', null, const Duration(seconds: 10));
 
   // Start the server.
   await pod.start();

@@ -25,6 +25,7 @@ abstract class ChangementStatut
     this.dateReponse,
     required this.livreId,
     required this.auteurId,
+    this.proposeParId,
   }) : dateProposition = dateProposition ?? DateTime.now();
 
   factory ChangementStatut({
@@ -37,6 +38,7 @@ abstract class ChangementStatut
     DateTime? dateReponse,
     required int livreId,
     required int auteurId,
+    int? proposeParId,
   }) = _ChangementStatutImpl;
 
   factory ChangementStatut.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -64,6 +66,7 @@ abstract class ChangementStatut
             ),
       livreId: jsonSerialization['livreId'] as int,
       auteurId: jsonSerialization['auteurId'] as int,
+      proposeParId: jsonSerialization['proposeParId'] as int?,
     );
   }
 
@@ -90,6 +93,8 @@ abstract class ChangementStatut
 
   int auteurId;
 
+  int? proposeParId;
+
   @override
   _i1.Table<int?> get table => t;
 
@@ -106,6 +111,7 @@ abstract class ChangementStatut
     DateTime? dateReponse,
     int? livreId,
     int? auteurId,
+    int? proposeParId,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -120,6 +126,7 @@ abstract class ChangementStatut
       if (dateReponse != null) 'dateReponse': dateReponse?.toJson(),
       'livreId': livreId,
       'auteurId': auteurId,
+      if (proposeParId != null) 'proposeParId': proposeParId,
     };
   }
 
@@ -136,6 +143,7 @@ abstract class ChangementStatut
       if (dateReponse != null) 'dateReponse': dateReponse?.toJson(),
       'livreId': livreId,
       'auteurId': auteurId,
+      if (proposeParId != null) 'proposeParId': proposeParId,
     };
   }
 
@@ -182,6 +190,7 @@ class _ChangementStatutImpl extends ChangementStatut {
     DateTime? dateReponse,
     required int livreId,
     required int auteurId,
+    int? proposeParId,
   }) : super._(
          id: id,
          ancienStatut: ancienStatut,
@@ -192,6 +201,7 @@ class _ChangementStatutImpl extends ChangementStatut {
          dateReponse: dateReponse,
          livreId: livreId,
          auteurId: auteurId,
+         proposeParId: proposeParId,
        );
 
   /// Returns a shallow copy of this [ChangementStatut]
@@ -208,6 +218,7 @@ class _ChangementStatutImpl extends ChangementStatut {
     Object? dateReponse = _Undefined,
     int? livreId,
     int? auteurId,
+    Object? proposeParId = _Undefined,
   }) {
     return ChangementStatut(
       id: id is int? ? id : this.id,
@@ -221,6 +232,7 @@ class _ChangementStatutImpl extends ChangementStatut {
       dateReponse: dateReponse is DateTime? ? dateReponse : this.dateReponse,
       livreId: livreId ?? this.livreId,
       auteurId: auteurId ?? this.auteurId,
+      proposeParId: proposeParId is int? ? proposeParId : this.proposeParId,
     );
   }
 }
@@ -275,6 +287,11 @@ class ChangementStatutUpdateTable
     table.auteurId,
     value,
   );
+
+  _i1.ColumnValue<int, int> proposeParId(int? value) => _i1.ColumnValue(
+    table.proposeParId,
+    value,
+  );
 }
 
 class ChangementStatutTable extends _i1.Table<int?> {
@@ -316,6 +333,10 @@ class ChangementStatutTable extends _i1.Table<int?> {
       'auteurId',
       this,
     );
+    proposeParId = _i1.ColumnInt(
+      'proposeParId',
+      this,
+    );
   }
 
   late final ChangementStatutUpdateTable updateTable;
@@ -336,6 +357,8 @@ class ChangementStatutTable extends _i1.Table<int?> {
 
   late final _i1.ColumnInt auteurId;
 
+  late final _i1.ColumnInt proposeParId;
+
   @override
   List<_i1.Column> get columns => [
     id,
@@ -347,6 +370,7 @@ class ChangementStatutTable extends _i1.Table<int?> {
     dateReponse,
     livreId,
     auteurId,
+    proposeParId,
   ];
 }
 

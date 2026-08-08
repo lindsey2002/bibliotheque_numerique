@@ -18,6 +18,8 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     required this.note,
     this.commentaire,
     DateTime? dateAvis,
+    this.reponseAuteur,
+    this.dateReponseAuteur,
     required this.lecteurId,
     required this.livreId,
   }) : dateAvis = dateAvis ?? DateTime.now();
@@ -27,6 +29,8 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     required int note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     required int lecteurId,
     required int livreId,
   }) = _AvisImpl;
@@ -39,6 +43,12 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       dateAvis: jsonSerialization['dateAvis'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['dateAvis']),
+      reponseAuteur: jsonSerialization['reponseAuteur'] as String?,
+      dateReponseAuteur: jsonSerialization['dateReponseAuteur'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['dateReponseAuteur'],
+            ),
       lecteurId: jsonSerialization['lecteurId'] as int,
       livreId: jsonSerialization['livreId'] as int,
     );
@@ -57,6 +67,10 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
 
   DateTime dateAvis;
 
+  String? reponseAuteur;
+
+  DateTime? dateReponseAuteur;
+
   int lecteurId;
 
   int livreId;
@@ -72,6 +86,8 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     int? note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     int? lecteurId,
     int? livreId,
   });
@@ -83,6 +99,9 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       'note': note,
       if (commentaire != null) 'commentaire': commentaire,
       'dateAvis': dateAvis.toJson(),
+      if (reponseAuteur != null) 'reponseAuteur': reponseAuteur,
+      if (dateReponseAuteur != null)
+        'dateReponseAuteur': dateReponseAuteur?.toJson(),
       'lecteurId': lecteurId,
       'livreId': livreId,
     };
@@ -96,6 +115,9 @@ abstract class Avis implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       'note': note,
       if (commentaire != null) 'commentaire': commentaire,
       'dateAvis': dateAvis.toJson(),
+      if (reponseAuteur != null) 'reponseAuteur': reponseAuteur,
+      if (dateReponseAuteur != null)
+        'dateReponseAuteur': dateReponseAuteur?.toJson(),
       'lecteurId': lecteurId,
       'livreId': livreId,
     };
@@ -139,6 +161,8 @@ class _AvisImpl extends Avis {
     required int note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     required int lecteurId,
     required int livreId,
   }) : super._(
@@ -146,6 +170,8 @@ class _AvisImpl extends Avis {
          note: note,
          commentaire: commentaire,
          dateAvis: dateAvis,
+         reponseAuteur: reponseAuteur,
+         dateReponseAuteur: dateReponseAuteur,
          lecteurId: lecteurId,
          livreId: livreId,
        );
@@ -159,6 +185,8 @@ class _AvisImpl extends Avis {
     int? note,
     Object? commentaire = _Undefined,
     DateTime? dateAvis,
+    Object? reponseAuteur = _Undefined,
+    Object? dateReponseAuteur = _Undefined,
     int? lecteurId,
     int? livreId,
   }) {
@@ -167,6 +195,12 @@ class _AvisImpl extends Avis {
       note: note ?? this.note,
       commentaire: commentaire is String? ? commentaire : this.commentaire,
       dateAvis: dateAvis ?? this.dateAvis,
+      reponseAuteur: reponseAuteur is String?
+          ? reponseAuteur
+          : this.reponseAuteur,
+      dateReponseAuteur: dateReponseAuteur is DateTime?
+          ? dateReponseAuteur
+          : this.dateReponseAuteur,
       lecteurId: lecteurId ?? this.lecteurId,
       livreId: livreId ?? this.livreId,
     );
@@ -189,6 +223,18 @@ class AvisUpdateTable extends _i1.UpdateTable<AvisTable> {
   _i1.ColumnValue<DateTime, DateTime> dateAvis(DateTime value) =>
       _i1.ColumnValue(
         table.dateAvis,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> reponseAuteur(String? value) =>
+      _i1.ColumnValue(
+        table.reponseAuteur,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> dateReponseAuteur(DateTime? value) =>
+      _i1.ColumnValue(
+        table.dateReponseAuteur,
         value,
       );
 
@@ -219,6 +265,14 @@ class AvisTable extends _i1.Table<int?> {
       this,
       hasDefault: true,
     );
+    reponseAuteur = _i1.ColumnString(
+      'reponseAuteur',
+      this,
+    );
+    dateReponseAuteur = _i1.ColumnDateTime(
+      'dateReponseAuteur',
+      this,
+    );
     lecteurId = _i1.ColumnInt(
       'lecteurId',
       this,
@@ -237,6 +291,10 @@ class AvisTable extends _i1.Table<int?> {
 
   late final _i1.ColumnDateTime dateAvis;
 
+  late final _i1.ColumnString reponseAuteur;
+
+  late final _i1.ColumnDateTime dateReponseAuteur;
+
   late final _i1.ColumnInt lecteurId;
 
   late final _i1.ColumnInt livreId;
@@ -247,6 +305,8 @@ class AvisTable extends _i1.Table<int?> {
     note,
     commentaire,
     dateAvis,
+    reponseAuteur,
+    dateReponseAuteur,
     lecteurId,
     livreId,
   ];

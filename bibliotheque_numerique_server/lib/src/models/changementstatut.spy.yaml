@@ -9,6 +9,7 @@ fields:
   dateReponse: DateTime?
   livreId: int, relation(parent=livre)
   auteurId: int, relation(parent=auteur)
+  proposeParId: int?, relation(parent=superadmin)
 indexes:
   changement_livre_idx:
     fields: livreId
