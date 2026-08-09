@@ -9,6 +9,7 @@ import 'src/generated/protocol.dart';
 import 'src/web/routes/app_config_route.dart';
 import 'src/web/routes/root.dart';
 import 'src/future_calls/rappel_abonnement_future_call.dart';
+import 'package:serverpod_swagger/serverpod_swagger.dart';
 
 /// The starting point of the Serverpod server.
 void run(List<String> args) async {
@@ -75,10 +76,13 @@ void run(List<String> args) async {
   }
 
   pod.registerFutureCall(RappelAbonnementFutureCall(), 'rappelAbonnement');
-  await pod.futureCallWithDelay('rappelAbonnement', null, const Duration(seconds: 10));
+  pod.webServer.addRoute(SwaggerUIRoute(Directory.current), '/swagger/**');
+  pod.webServer.addRoute(ApiSpecRoute(Directory.current), '/apispec.json');
 
   // Start the server.
   await pod.start();
+
+  await pod.futureCallWithDelay('rappelAbonnement', null, const Duration(seconds: 10));
 }
 
 void _sendRegistrationCode(

@@ -67,13 +67,15 @@ migrations/ # Historique des migrations de base de données
 | `AccesEndpoint` | Vérification des droits de lecture d'un ouvrage |
 | `VersementEndpoint` | Calcul et consultation des versements mensuels des auteurs |
 | `StatistiquesEndpoint` | Évolution mensuelle de la fréquentation d'un livre |
-| `ConfigurationEndpoint` | Paramétrage des tarifs et taux de commission (Super Admin) |
+| `ConfigurationEndpoint` | Paramétrage des tarifs et taux de commission (SuperAdmin) |
+| `NotificationEndpoint` | Notifications in-app, y compris flux temps réel |
 
 ## État d'avancement
 
 - ✅ Modélisation des données (14 entités)
 - ✅ Endpoints backend
-- ⏳ Documentation Swagger/OpenAPI (à faire une fois le backend finalisé)
+- ✅ Documentation Swagger/OpenAPI
+- ⏳ Tests via Bruno (en cours)
 - ⏳ Client Flutter (à venir)
 
 ## Contexte académique

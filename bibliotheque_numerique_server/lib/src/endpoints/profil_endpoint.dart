@@ -76,4 +76,12 @@ final authUserId = UuidValue.fromString(session.authenticated!.userIdentifier);
     }
     return 'aucun';
   }
+
+  Future<SuperAdmin> creerProfilSuperAdminDEV(Session session, {required String nom, required String email}) async {
+  final authUserId = UuidValue.fromString(session.authenticated!.userIdentifier);
+  return await SuperAdmin.db.insertRow(
+    session,
+    SuperAdmin(nom: nom, email: email, authUserId: authUserId),
+  );
+}
 }

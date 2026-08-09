@@ -1,0 +1,2086 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My Serverpod API",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Main API Server"
+    }
+  ],
+  "paths": {
+    "/abonnement/souscrire": {
+      "post": {
+        "summary": "souscrire",
+        "operationId": "abonnement.souscrire",
+        "tags": [
+          "abonnement"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeAbonnement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Abonnement"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/abonnement/demarrerEssaiPremium": {
+      "post": {
+        "summary": "demarrerEssaiPremium",
+        "operationId": "abonnement.demarrerEssaiPremium",
+        "tags": [
+          "abonnement"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Abonnement"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/abonnement/historique": {
+      "get": {
+        "summary": "historique",
+        "operationId": "abonnement.historique",
+        "tags": [
+          "abonnement"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Abonnement"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/acces/verifierAcces": {
+      "get": {
+        "summary": "verifierAcces",
+        "operationId": "acces.verifierAcces",
+        "tags": [
+          "acces"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatAcces"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/ambianceSonore/creer": {
+      "post": {
+        "summary": "creer",
+        "operationId": "ambianceSonore.creer",
+        "tags": [
+          "ambianceSonore"
+        ],
+        "parameters": [
+          {
+            "name": "nom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fichierAudio",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AmbianceSonore"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/ambianceSonore/listerToutes": {
+      "get": {
+        "summary": "listerToutes",
+        "operationId": "ambianceSonore.listerToutes",
+        "tags": [
+          "ambianceSonore"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AmbianceSonore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/avisPublic/avisDuLivre": {
+      "get": {
+        "summary": "avisDuLivre",
+        "operationId": "avisPublic.avisDuLivre",
+        "tags": [
+          "avisPublic"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Avis"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/avis/laisser": {
+      "post": {
+        "summary": "laisser",
+        "operationId": "avis.laisser",
+        "tags": [
+          "avis"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "commentaire",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avis"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/avis/repondre": {
+      "get": {
+        "summary": "repondre",
+        "operationId": "avis.repondre",
+        "tags": [
+          "avis"
+        ],
+        "parameters": [
+          {
+            "name": "avisId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "reponse",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avis"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/categorie/creer": {
+      "post": {
+        "summary": "creer",
+        "operationId": "categorie.creer",
+        "tags": [
+          "categorie"
+        ],
+        "parameters": [
+          {
+            "name": "nom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorie"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/categorie/listerToutes": {
+      "get": {
+        "summary": "listerToutes",
+        "operationId": "categorie.listerToutes",
+        "tags": [
+          "categorie"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categorie"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/changementStatut/proposer": {
+      "post": {
+        "summary": "proposer",
+        "operationId": "changementStatut.proposer",
+        "tags": [
+          "changementStatut"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "nouveauStatut",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/StatutPrix"
+            }
+          },
+          {
+            "name": "messageAdmin",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangementStatut"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/changementStatut/repondre": {
+      "patch": {
+        "summary": "repondre",
+        "operationId": "changementStatut.repondre",
+        "tags": [
+          "changementStatut"
+        ],
+        "parameters": [
+          {
+            "name": "changementId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "accepte",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangementStatut"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/changementStatut/mesPropositionsEnAttente": {
+      "get": {
+        "summary": "mesPropositionsEnAttente",
+        "operationId": "changementStatut.mesPropositionsEnAttente",
+        "tags": [
+          "changementStatut"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChangementStatut"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/configuration/definirTauxCommission": {
+      "post": {
+        "summary": "definirTauxCommission",
+        "operationId": "configuration.definirTauxCommission",
+        "tags": [
+          "configuration"
+        ],
+        "parameters": [
+          {
+            "name": "tauxPlateforme",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "montantParLectureUnique",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "seuilLecteursUniquesGratuit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TauxCommission"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/configuration/definirTarif": {
+      "post": {
+        "summary": "definirTarif",
+        "operationId": "configuration.definirTarif",
+        "tags": [
+          "configuration"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeAbonnement"
+            }
+          },
+          {
+            "name": "prix",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarifAbonnement"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/decision/listerEnAttente": {
+      "get": {
+        "summary": "listerEnAttente",
+        "operationId": "decision.listerEnAttente",
+        "tags": [
+          "decision"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Livre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/decision/valider": {
+      "patch": {
+        "summary": "valider",
+        "operationId": "decision.valider",
+        "tags": [
+          "decision"
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Decision"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/decision/rejeter": {
+      "patch": {
+        "summary": "rejeter",
+        "operationId": "decision.rejeter",
+        "tags": [
+          "decision"
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Decision"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/decision/resoumettre": {
+      "post": {
+        "summary": "resoumettre",
+        "operationId": "decision.resoumettre",
+        "tags": [
+          "decision"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "justification",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Decision"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/favoris/ajouter": {
+      "post": {
+        "summary": "ajouter",
+        "operationId": "favoris.ajouter",
+        "tags": [
+          "favoris"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favoris"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/favoris/retirer": {
+      "delete": {
+        "summary": "retirer",
+        "operationId": "favoris.retirer",
+        "tags": [
+          "favoris"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/favoris/mesFavoris": {
+      "get": {
+        "summary": "mesFavoris",
+        "operationId": "favoris.mesFavoris",
+        "tags": [
+          "favoris"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favoris"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/langue/creer": {
+      "post": {
+        "summary": "creer",
+        "operationId": "langue.creer",
+        "tags": [
+          "langue"
+        ],
+        "parameters": [
+          {
+            "name": "nom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Langue"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/langue/listerToutes": {
+      "get": {
+        "summary": "listerToutes",
+        "operationId": "langue.listerToutes",
+        "tags": [
+          "langue"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Langue"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/lecture/enregistrer": {
+      "post": {
+        "summary": "enregistrer",
+        "operationId": "lecture.enregistrer",
+        "tags": [
+          "lecture"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pourcentageLu",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lecture"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/lecture/compterLecteursUniquesDuMois": {
+      "get": {
+        "summary": "compterLecteursUniquesDuMois",
+        "operationId": "lecture.compterLecteursUniquesDuMois",
+        "tags": [
+          "lecture"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "moisAnnee",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/livre/soumettre": {
+      "post": {
+        "summary": "soumettre",
+        "operationId": "livre.soumettre",
+        "tags": [
+          "livre"
+        ],
+        "parameters": [
+          {
+            "name": "titre",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "categorieId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "langueId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "modeAudio",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ModeAudio"
+            }
+          },
+          {
+            "name": "ambianceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livre"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/livre/catalogue": {
+      "get": {
+        "summary": "catalogue",
+        "operationId": "livre.catalogue",
+        "tags": [
+          "livre"
+        ],
+        "parameters": [
+          {
+            "name": "categorieId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "langueId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Livre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/livre/monCatalogue": {
+      "get": {
+        "summary": "monCatalogue",
+        "operationId": "livre.monCatalogue",
+        "tags": [
+          "livre"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Livre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/notification/mesNotifications": {
+      "get": {
+        "summary": "mesNotifications",
+        "operationId": "notification.mesNotifications",
+        "tags": [
+          "notification"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/notification/marquerCommeLue": {
+      "patch": {
+        "summary": "marquerCommeLue",
+        "operationId": "notification.marquerCommeLue",
+        "tags": [
+          "notification"
+        ],
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/notification/ecouter": {
+      "get": {
+        "summary": "ecouter",
+        "operationId": "notification.ecouter",
+        "tags": [
+          "notification"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stream"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/paiement/effectuer": {
+      "post": {
+        "summary": "effectuer",
+        "operationId": "paiement.effectuer",
+        "tags": [
+          "paiement"
+        ],
+        "parameters": [
+          {
+            "name": "abonnementId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Paiement"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/profil/creerProfilLecteur": {
+      "post": {
+        "summary": "creerProfilLecteur",
+        "operationId": "profil.creerProfilLecteur",
+        "tags": [
+          "profil"
+        ],
+        "parameters": [
+          {
+            "name": "nom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "languePreferee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lecteur"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/profil/creerProfilAuteur": {
+      "post": {
+        "summary": "creerProfilAuteur",
+        "operationId": "profil.creerProfilAuteur",
+        "tags": [
+          "profil"
+        ],
+        "parameters": [
+          {
+            "name": "nom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "biographie",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "languePreferee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auteur"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/profil/obtenirMonRole": {
+      "get": {
+        "summary": "obtenirMonRole",
+        "operationId": "profil.obtenirMonRole",
+        "tags": [
+          "profil"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/statistiques/evolutionLecteursUniques": {
+      "get": {
+        "summary": "evolutionLecteursUniques",
+        "operationId": "statistiques.evolutionLecteursUniques",
+        "tags": [
+          "statistiques"
+        ],
+        "parameters": [
+          {
+            "name": "livreId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/versement/genererPourLeMois": {
+      "post": {
+        "summary": "genererPourLeMois",
+        "operationId": "versement.genererPourLeMois",
+        "tags": [
+          "versement"
+        ],
+        "parameters": [
+          {
+            "name": "moisAnnee",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Versement"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/versement/mesVersements": {
+      "get": {
+        "summary": "mesVersements",
+        "operationId": "versement.mesVersements",
+        "tags": [
+          "versement"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Versement"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Abonnement": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TypeAbonnement"
+          },
+          "dateDebut": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "dateFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "prix": {
+            "type": "number",
+            "format": "double"
+          },
+          "essaiPremiumActif": {
+            "$ref": "#/components/schemas/bool, default=false"
+          },
+          "dateFinEssaiPremium": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateProchainPaiement": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lecteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=lecteur)"
+          }
+        },
+        "required": [
+          "type",
+          "dateDebut",
+          "prix",
+          "essaiPremiumActif",
+          "lecteurId"
+        ]
+      },
+      "AmbianceSonore": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "fichierAudio": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "fichierAudio"
+        ]
+      },
+      "Auteur": {
+        "type": "object",
+        "properties": {
+          "biographie": {
+            "type": "string"
+          }
+        }
+      },
+      "Avis": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "commentaire": {
+            "type": "string"
+          },
+          "dateAvis": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "reponseAuteur": {
+            "type": "string"
+          },
+          "dateReponseAuteur": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lecteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=lecteur)"
+          },
+          "livreId": {
+            "$ref": "#/components/schemas/int, relation(parent=livre)"
+          }
+        },
+        "required": [
+          "note",
+          "dateAvis",
+          "lecteurId",
+          "livreId"
+        ]
+      },
+      "Categorie": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom"
+        ]
+      },
+      "ChangementStatut": {
+        "type": "object",
+        "properties": {
+          "ancienStatut": {
+            "$ref": "#/components/schemas/StatutPrix"
+          },
+          "nouveauStatut": {
+            "$ref": "#/components/schemas/StatutPrix"
+          },
+          "messageAdmin": {
+            "type": "string"
+          },
+          "reponseAuteur": {
+            "type": "boolean"
+          },
+          "dateProposition": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "dateReponse": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "livreId": {
+            "$ref": "#/components/schemas/int, relation(parent=livre)"
+          },
+          "auteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=auteur)"
+          },
+          "proposeParId": {
+            "$ref": "#/components/schemas/int?, relation(parent=superadmin)"
+          }
+        },
+        "required": [
+          "ancienStatut",
+          "nouveauStatut",
+          "dateProposition",
+          "livreId",
+          "auteurId",
+          "proposeParId"
+        ]
+      },
+      "Decision": {
+        "type": "object",
+        "properties": {
+          "etat": {
+            "$ref": "#/components/schemas/EtatDecision, default=enAttente"
+          },
+          "justificationAuteur": {
+            "type": "string"
+          },
+          "dateDecision": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "livreId": {
+            "$ref": "#/components/schemas/int, relation(parent=livre)"
+          },
+          "superAdminId": {
+            "$ref": "#/components/schemas/int?, relation(parent=superadmin)"
+          }
+        },
+        "required": [
+          "etat",
+          "dateDecision",
+          "livreId",
+          "superAdminId"
+        ]
+      },
+      "Favoris": {
+        "type": "object",
+        "properties": {
+          "dateAjout": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "lecteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=lecteur)"
+          },
+          "livreId": {
+            "$ref": "#/components/schemas/int, relation(parent=livre)"
+          }
+        },
+        "required": [
+          "dateAjout",
+          "lecteurId",
+          "livreId"
+        ]
+      },
+      "Langue": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "code"
+        ]
+      },
+      "Lecteur": {
+        "type": "object",
+        "properties": {
+          "essaiPremiumUtilise": {
+            "$ref": "#/components/schemas/bool, default=false"
+          }
+        },
+        "required": [
+          "essaiPremiumUtilise"
+        ]
+      },
+      "Lecture": {
+        "type": "object",
+        "properties": {
+          "datePremiereLecture": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "pourcentageLu": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "moisAnnee": {
+            "type": "string"
+          },
+          "montantCommission": {
+            "type": "number",
+            "format": "double"
+          },
+          "lecteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=lecteur)"
+          },
+          "livreId": {
+            "$ref": "#/components/schemas/int, relation(parent=livre)"
+          }
+        },
+        "required": [
+          "datePremiereLecture",
+          "pourcentageLu",
+          "moisAnnee",
+          "lecteurId",
+          "livreId"
+        ]
+      },
+      "Livre": {
+        "type": "object",
+        "properties": {
+          "titre": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dateSoumission": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "modeAudio": {
+            "$ref": "#/components/schemas/ModeAudio, default=aucun"
+          },
+          "statutPrix": {
+            "$ref": "#/components/schemas/StatutPrix, default=gratuit"
+          },
+          "auteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=auteur)"
+          },
+          "categorieId": {
+            "$ref": "#/components/schemas/int, relation(parent=categorie)"
+          },
+          "langueId": {
+            "$ref": "#/components/schemas/int, relation(parent=langue)"
+          },
+          "ambianceId": {
+            "$ref": "#/components/schemas/int?, relation(parent=ambiance_sonore)"
+          }
+        },
+        "required": [
+          "titre",
+          "dateSoumission",
+          "modeAudio",
+          "statutPrix",
+          "auteurId",
+          "categorieId",
+          "langueId",
+          "ambianceId"
+        ]
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "titre": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "lu": {
+            "$ref": "#/components/schemas/bool, default=false"
+          },
+          "dateCreation": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "destinataireType": {
+            "$ref": "#/components/schemas/TypeDestinataire"
+          },
+          "destinataireId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "titre",
+          "message",
+          "lu",
+          "dateCreation",
+          "destinataireType",
+          "destinataireId"
+        ]
+      },
+      "Paiement": {
+        "type": "object",
+        "properties": {
+          "montant": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "abonnementId": {
+            "$ref": "#/components/schemas/int, relation(parent=abonnement)"
+          }
+        },
+        "required": [
+          "montant",
+          "date",
+          "mode",
+          "abonnementId"
+        ]
+      },
+      "ResultatAcces": {
+        "type": "object",
+        "properties": {
+          "statut": {
+            "type": "string"
+          },
+          "pagesAutorisees": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "statut"
+        ]
+      },
+      "SuperAdmin": {
+        "type": "object",
+        "properties": {
+          "niveauAcces": {
+            "type": "string"
+          }
+        }
+      },
+      "TarifAbonnement": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TypeAbonnement"
+          },
+          "prix": {
+            "type": "number",
+            "format": "double"
+          },
+          "dateDebut": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "dateFin": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "type",
+          "prix",
+          "dateDebut"
+        ]
+      },
+      "TauxCommission": {
+        "type": "object",
+        "properties": {
+          "tauxPlateforme": {
+            "type": "number",
+            "format": "double"
+          },
+          "montantParLectureUnique": {
+            "type": "number",
+            "format": "double"
+          },
+          "seuilLecteursUniquesGratuit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dateDebut": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "dateFin": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "tauxPlateforme",
+          "montantParLectureUnique",
+          "seuilLecteursUniquesGratuit",
+          "dateDebut"
+        ]
+      },
+      "Utilisateur": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "languePreferee": {
+            "type": "string"
+          },
+          "dateCreation": {
+            "$ref": "#/components/schemas/DateTime, default=now"
+          },
+          "authUserId": {
+            "$ref": "#/components/schemas/UuidValue"
+          }
+        },
+        "required": [
+          "nom",
+          "email",
+          "dateCreation",
+          "authUserId"
+        ]
+      },
+      "Versement": {
+        "type": "object",
+        "properties": {
+          "mois": {
+            "type": "string"
+          },
+          "montantBrut": {
+            "type": "number",
+            "format": "double"
+          },
+          "montantNet": {
+            "type": "number",
+            "format": "double"
+          },
+          "nbLecteursUniques": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "auteurId": {
+            "$ref": "#/components/schemas/int, relation(parent=auteur)"
+          },
+          "tauxId": {
+            "$ref": "#/components/schemas/int, relation(parent=taux_commission)"
+          }
+        },
+        "required": [
+          "mois",
+          "montantBrut",
+          "montantNet",
+          "nbLecteursUniques",
+          "auteurId",
+          "tauxId"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT authentication token"
+      }
+    }
+  }
+}

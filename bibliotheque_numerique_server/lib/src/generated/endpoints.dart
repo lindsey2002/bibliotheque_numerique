@@ -1226,6 +1226,31 @@ class Endpoints extends _i1.EndpointDispatch {
               ) async => (endpoints['profil'] as _i19.ProfilEndpoint)
                   .obtenirMonRole(session),
         ),
+        'creerProfilSuperAdminDEV': _i1.MethodConnector(
+          name: 'creerProfilSuperAdminDEV',
+          params: {
+            'nom': _i1.ParameterDescription(
+              name: 'nom',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'email': _i1.ParameterDescription(
+              name: 'email',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['profil'] as _i19.ProfilEndpoint)
+                  .creerProfilSuperAdminDEV(
+                    session,
+                    nom: params['nom'],
+                    email: params['email'],
+                  ),
+        ),
       },
     );
     connectors['statistiques'] = _i1.EndpointConnector(

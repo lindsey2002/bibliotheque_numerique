@@ -2009,6 +2009,41 @@ class _ProfilEndpoint {
       }
     });
   }
+
+  _i3.Future<_i23.SuperAdmin> creerProfilSuperAdminDEV(
+    _i1.TestSessionBuilder sessionBuilder, {
+    required String nom,
+    required String email,
+  }) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'profil',
+            method: 'creerProfilSuperAdminDEV',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'profil',
+          methodName: 'creerProfilSuperAdminDEV',
+          parameters: _i1.testObjectToJson({
+            'nom': nom,
+            'email': email,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _i3.Future<_i23.SuperAdmin>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
 }
 
 class _StatistiquesEndpoint {

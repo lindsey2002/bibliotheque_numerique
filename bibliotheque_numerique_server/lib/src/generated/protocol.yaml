@@ -62,6 +62,7 @@ profil:
   - creerProfilLecteur:
   - creerProfilAuteur:
   - obtenirMonRole:
+  - creerProfilSuperAdminDEV:
 statistiques:
   - evolutionLecteursUniques:
 versement:
