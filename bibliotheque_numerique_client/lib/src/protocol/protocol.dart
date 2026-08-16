@@ -24,32 +24,36 @@ import 'langue.dart' as _i11;
 import 'lecture.dart' as _i12;
 import 'livre.dart' as _i13;
 import 'modeaudio.dart' as _i14;
-import 'paiement.dart' as _i15;
-import 'resultatacces.dart' as _i16;
-import 'statutprix.dart' as _i17;
-import 'tarifabonnement.dart' as _i18;
-import 'tauxcommission.dart' as _i19;
-import 'typeabonnement.dart' as _i20;
-import 'versement.dart' as _i21;
+import 'notification.dart' as _i15;
+import 'paiement.dart' as _i16;
+import 'resultatacces.dart' as _i17;
+import 'statutprix.dart' as _i18;
+import 'tarifabonnement.dart' as _i19;
+import 'tauxcommission.dart' as _i20;
+import 'typeabonnement.dart' as _i21;
+import 'typedestinataire.dart' as _i22;
+import 'versement.dart' as _i23;
 import 'package:bibliotheque_numerique_client/src/protocol/abonnement.dart'
-    as _i22;
+    as _i24;
 import 'package:bibliotheque_numerique_client/src/protocol/ambiancesonore.dart'
-    as _i23;
-import 'package:bibliotheque_numerique_client/src/protocol/avis.dart' as _i24;
-import 'package:bibliotheque_numerique_client/src/protocol/categorie.dart'
     as _i25;
+import 'package:bibliotheque_numerique_client/src/protocol/avis.dart' as _i26;
+import 'package:bibliotheque_numerique_client/src/protocol/categorie.dart'
+    as _i27;
 import 'package:bibliotheque_numerique_client/src/protocol/changementstatut.dart'
-    as _i26;
-import 'package:bibliotheque_numerique_client/src/protocol/livre.dart' as _i27;
-import 'package:bibliotheque_numerique_client/src/protocol/favoris.dart'
     as _i28;
-import 'package:bibliotheque_numerique_client/src/protocol/langue.dart' as _i29;
-import 'package:bibliotheque_numerique_client/src/protocol/versement.dart'
+import 'package:bibliotheque_numerique_client/src/protocol/livre.dart' as _i29;
+import 'package:bibliotheque_numerique_client/src/protocol/favoris.dart'
     as _i30;
-import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
-    as _i31;
-import 'package:serverpod_auth_core_client/serverpod_auth_core_client.dart'
+import 'package:bibliotheque_numerique_client/src/protocol/langue.dart' as _i31;
+import 'package:bibliotheque_numerique_client/src/protocol/notification.dart'
     as _i32;
+import 'package:bibliotheque_numerique_client/src/protocol/versement.dart'
+    as _i33;
+import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
+    as _i34;
+import 'package:serverpod_auth_core_client/serverpod_auth_core_client.dart'
+    as _i35;
 export 'abonnement.dart';
 export 'ambiancesonore.dart';
 export 'avis.dart';
@@ -62,12 +66,14 @@ export 'langue.dart';
 export 'lecture.dart';
 export 'livre.dart';
 export 'modeaudio.dart';
+export 'notification.dart';
 export 'paiement.dart';
 export 'resultatacces.dart';
 export 'statutprix.dart';
 export 'tarifabonnement.dart';
 export 'tauxcommission.dart';
 export 'typeabonnement.dart';
+export 'typedestinataire.dart';
 export 'utilisateur.dart';
 export 'versement.dart';
 export 'client.dart';
@@ -148,29 +154,35 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i14.ModeAudio) {
       return _i14.ModeAudio.fromJson(data) as T;
     }
-    if (t == _i15.Paiement) {
-      return _i15.Paiement.fromJson(data) as T;
+    if (t == _i15.Notification) {
+      return _i15.Notification.fromJson(data) as T;
     }
-    if (t == _i16.ResultatAcces) {
-      return _i16.ResultatAcces.fromJson(data) as T;
+    if (t == _i16.Paiement) {
+      return _i16.Paiement.fromJson(data) as T;
     }
-    if (t == _i17.StatutPrix) {
-      return _i17.StatutPrix.fromJson(data) as T;
+    if (t == _i17.ResultatAcces) {
+      return _i17.ResultatAcces.fromJson(data) as T;
+    }
+    if (t == _i18.StatutPrix) {
+      return _i18.StatutPrix.fromJson(data) as T;
     }
     if (t == _i4.SuperAdmin) {
       return _i4.SuperAdmin.fromJson(data) as T;
     }
-    if (t == _i18.TarifAbonnement) {
-      return _i18.TarifAbonnement.fromJson(data) as T;
+    if (t == _i19.TarifAbonnement) {
+      return _i19.TarifAbonnement.fromJson(data) as T;
     }
-    if (t == _i19.TauxCommission) {
-      return _i19.TauxCommission.fromJson(data) as T;
+    if (t == _i20.TauxCommission) {
+      return _i20.TauxCommission.fromJson(data) as T;
     }
-    if (t == _i20.TypeAbonnement) {
-      return _i20.TypeAbonnement.fromJson(data) as T;
+    if (t == _i21.TypeAbonnement) {
+      return _i21.TypeAbonnement.fromJson(data) as T;
     }
-    if (t == _i21.Versement) {
-      return _i21.Versement.fromJson(data) as T;
+    if (t == _i22.TypeDestinataire) {
+      return _i22.TypeDestinataire.fromJson(data) as T;
+    }
+    if (t == _i23.Versement) {
+      return _i23.Versement.fromJson(data) as T;
     }
     if (t == _i1.getType<_i2.Abonnement?>()) {
       return (data != null ? _i2.Abonnement.fromJson(data) : null) as T;
@@ -214,63 +226,75 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i14.ModeAudio?>()) {
       return (data != null ? _i14.ModeAudio.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i15.Paiement?>()) {
-      return (data != null ? _i15.Paiement.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i15.Notification?>()) {
+      return (data != null ? _i15.Notification.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i16.ResultatAcces?>()) {
-      return (data != null ? _i16.ResultatAcces.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i16.Paiement?>()) {
+      return (data != null ? _i16.Paiement.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i17.StatutPrix?>()) {
-      return (data != null ? _i17.StatutPrix.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i17.ResultatAcces?>()) {
+      return (data != null ? _i17.ResultatAcces.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i18.StatutPrix?>()) {
+      return (data != null ? _i18.StatutPrix.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i4.SuperAdmin?>()) {
       return (data != null ? _i4.SuperAdmin.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i18.TarifAbonnement?>()) {
-      return (data != null ? _i18.TarifAbonnement.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i19.TarifAbonnement?>()) {
+      return (data != null ? _i19.TarifAbonnement.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i19.TauxCommission?>()) {
-      return (data != null ? _i19.TauxCommission.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i20.TauxCommission?>()) {
+      return (data != null ? _i20.TauxCommission.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i20.TypeAbonnement?>()) {
-      return (data != null ? _i20.TypeAbonnement.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i21.TypeAbonnement?>()) {
+      return (data != null ? _i21.TypeAbonnement.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i21.Versement?>()) {
-      return (data != null ? _i21.Versement.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i22.TypeDestinataire?>()) {
+      return (data != null ? _i22.TypeDestinataire.fromJson(data) : null) as T;
     }
-    if (t == List<_i22.Abonnement>) {
-      return (data as List).map((e) => deserialize<_i22.Abonnement>(e)).toList()
+    if (t == _i1.getType<_i23.Versement?>()) {
+      return (data != null ? _i23.Versement.fromJson(data) : null) as T;
+    }
+    if (t == List<_i24.Abonnement>) {
+      return (data as List).map((e) => deserialize<_i24.Abonnement>(e)).toList()
           as T;
     }
-    if (t == List<_i23.AmbianceSonore>) {
+    if (t == List<_i25.AmbianceSonore>) {
       return (data as List)
-              .map((e) => deserialize<_i23.AmbianceSonore>(e))
+              .map((e) => deserialize<_i25.AmbianceSonore>(e))
               .toList()
           as T;
     }
-    if (t == List<_i24.Avis>) {
-      return (data as List).map((e) => deserialize<_i24.Avis>(e)).toList() as T;
+    if (t == List<_i26.Avis>) {
+      return (data as List).map((e) => deserialize<_i26.Avis>(e)).toList() as T;
     }
-    if (t == List<_i25.Categorie>) {
-      return (data as List).map((e) => deserialize<_i25.Categorie>(e)).toList()
+    if (t == List<_i27.Categorie>) {
+      return (data as List).map((e) => deserialize<_i27.Categorie>(e)).toList()
           as T;
     }
-    if (t == List<_i26.ChangementStatut>) {
+    if (t == List<_i28.ChangementStatut>) {
       return (data as List)
-              .map((e) => deserialize<_i26.ChangementStatut>(e))
+              .map((e) => deserialize<_i28.ChangementStatut>(e))
               .toList()
           as T;
     }
-    if (t == List<_i27.Livre>) {
-      return (data as List).map((e) => deserialize<_i27.Livre>(e)).toList()
+    if (t == List<_i29.Livre>) {
+      return (data as List).map((e) => deserialize<_i29.Livre>(e)).toList()
           as T;
     }
-    if (t == List<_i28.Favoris>) {
-      return (data as List).map((e) => deserialize<_i28.Favoris>(e)).toList()
+    if (t == List<_i30.Favoris>) {
+      return (data as List).map((e) => deserialize<_i30.Favoris>(e)).toList()
           as T;
     }
-    if (t == List<_i29.Langue>) {
-      return (data as List).map((e) => deserialize<_i29.Langue>(e)).toList()
+    if (t == List<_i31.Langue>) {
+      return (data as List).map((e) => deserialize<_i31.Langue>(e)).toList()
+          as T;
+    }
+    if (t == List<_i32.Notification>) {
+      return (data as List)
+              .map((e) => deserialize<_i32.Notification>(e))
+              .toList()
           as T;
     }
     if (t == Map<String, int>) {
@@ -279,15 +303,15 @@ class Protocol extends _i1.SerializationManager {
           )
           as T;
     }
-    if (t == List<_i30.Versement>) {
-      return (data as List).map((e) => deserialize<_i30.Versement>(e)).toList()
+    if (t == List<_i33.Versement>) {
+      return (data as List).map((e) => deserialize<_i33.Versement>(e)).toList()
           as T;
     }
     try {
-      return _i31.Protocol().deserialize<T>(data, t);
+      return _i34.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
-      return _i32.Protocol().deserialize<T>(data, t);
+      return _i35.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -308,14 +332,16 @@ class Protocol extends _i1.SerializationManager {
       _i12.Lecture => 'Lecture',
       _i13.Livre => 'Livre',
       _i14.ModeAudio => 'ModeAudio',
-      _i15.Paiement => 'Paiement',
-      _i16.ResultatAcces => 'ResultatAcces',
-      _i17.StatutPrix => 'StatutPrix',
+      _i15.Notification => 'Notification',
+      _i16.Paiement => 'Paiement',
+      _i17.ResultatAcces => 'ResultatAcces',
+      _i18.StatutPrix => 'StatutPrix',
       _i4.SuperAdmin => 'SuperAdmin',
-      _i18.TarifAbonnement => 'TarifAbonnement',
-      _i19.TauxCommission => 'TauxCommission',
-      _i20.TypeAbonnement => 'TypeAbonnement',
-      _i21.Versement => 'Versement',
+      _i19.TarifAbonnement => 'TarifAbonnement',
+      _i20.TauxCommission => 'TauxCommission',
+      _i21.TypeAbonnement => 'TypeAbonnement',
+      _i22.TypeDestinataire => 'TypeDestinataire',
+      _i23.Versement => 'Versement',
       _ => null,
     };
   }
@@ -361,28 +387,32 @@ class Protocol extends _i1.SerializationManager {
         return 'Livre';
       case _i14.ModeAudio():
         return 'ModeAudio';
-      case _i15.Paiement():
+      case _i15.Notification():
+        return 'Notification';
+      case _i16.Paiement():
         return 'Paiement';
-      case _i16.ResultatAcces():
+      case _i17.ResultatAcces():
         return 'ResultatAcces';
-      case _i17.StatutPrix():
+      case _i18.StatutPrix():
         return 'StatutPrix';
       case _i4.SuperAdmin():
         return 'SuperAdmin';
-      case _i18.TarifAbonnement():
+      case _i19.TarifAbonnement():
         return 'TarifAbonnement';
-      case _i19.TauxCommission():
+      case _i20.TauxCommission():
         return 'TauxCommission';
-      case _i20.TypeAbonnement():
+      case _i21.TypeAbonnement():
         return 'TypeAbonnement';
-      case _i21.Versement():
+      case _i22.TypeDestinataire():
+        return 'TypeDestinataire';
+      case _i23.Versement():
         return 'Versement';
     }
-    className = _i31.Protocol().getClassNameForObject(data);
+    className = _i34.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth_idp.$className';
     }
-    className = _i32.Protocol().getClassNameForObject(data);
+    className = _i35.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth_core.$className';
     }
@@ -437,37 +467,43 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName == 'ModeAudio') {
       return deserialize<_i14.ModeAudio>(data['data']);
     }
+    if (dataClassName == 'Notification') {
+      return deserialize<_i15.Notification>(data['data']);
+    }
     if (dataClassName == 'Paiement') {
-      return deserialize<_i15.Paiement>(data['data']);
+      return deserialize<_i16.Paiement>(data['data']);
     }
     if (dataClassName == 'ResultatAcces') {
-      return deserialize<_i16.ResultatAcces>(data['data']);
+      return deserialize<_i17.ResultatAcces>(data['data']);
     }
     if (dataClassName == 'StatutPrix') {
-      return deserialize<_i17.StatutPrix>(data['data']);
+      return deserialize<_i18.StatutPrix>(data['data']);
     }
     if (dataClassName == 'SuperAdmin') {
       return deserialize<_i4.SuperAdmin>(data['data']);
     }
     if (dataClassName == 'TarifAbonnement') {
-      return deserialize<_i18.TarifAbonnement>(data['data']);
+      return deserialize<_i19.TarifAbonnement>(data['data']);
     }
     if (dataClassName == 'TauxCommission') {
-      return deserialize<_i19.TauxCommission>(data['data']);
+      return deserialize<_i20.TauxCommission>(data['data']);
     }
     if (dataClassName == 'TypeAbonnement') {
-      return deserialize<_i20.TypeAbonnement>(data['data']);
+      return deserialize<_i21.TypeAbonnement>(data['data']);
+    }
+    if (dataClassName == 'TypeDestinataire') {
+      return deserialize<_i22.TypeDestinataire>(data['data']);
     }
     if (dataClassName == 'Versement') {
-      return deserialize<_i21.Versement>(data['data']);
+      return deserialize<_i23.Versement>(data['data']);
     }
     if (dataClassName.startsWith('serverpod_auth_idp.')) {
       data['className'] = dataClassName.substring(19);
-      return _i31.Protocol().deserializeByClassName(data);
+      return _i34.Protocol().deserializeByClassName(data);
     }
     if (dataClassName.startsWith('serverpod_auth_core.')) {
       data['className'] = dataClassName.substring(20);
-      return _i32.Protocol().deserializeByClassName(data);
+      return _i35.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -482,10 +518,10 @@ class Protocol extends _i1.SerializationManager {
       return null;
     }
     try {
-      return _i31.Protocol().mapRecordToJson(record);
+      return _i34.Protocol().mapRecordToJson(record);
     } catch (_) {}
     try {
-      return _i32.Protocol().mapRecordToJson(record);
+      return _i35.Protocol().mapRecordToJson(record);
     } catch (_) {}
     throw Exception('Unsupported record type ${record.runtimeType}');
   }

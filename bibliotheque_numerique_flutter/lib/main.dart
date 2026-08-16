@@ -1,40 +1,48 @@
-import 'package:bibliotheque_numerique_client/bibliotheque_numerique_client.dart';
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
-import 'features/home/presentation/screens/public_home_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
-// import 'package:serverpod_auth_idp_flutter/serverpod_auth_idp_flutter.dart'; // ← désactivé temporairement
+import 'package:serverpod_auth_idp_flutter/serverpod_auth_idp_flutter.dart';
+import 'package:bibliotheque_numerique_client/bibliotheque_numerique_client.dart';
 
-late final Client client;
+import 'core/theme/app_theme.dart';
+import 'core/theme/theme_controller.dart';
+import 'router/app_router.dart';
+
+late Client client;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-  _initServerpod();
+
+  const serverUrl = 'http://localhost:8080/';
+
+  client = Client(serverUrl)
+    ..connectivityMonitor = FlutterConnectivityMonitor()
+    ..authSessionManager = FlutterAuthSessionManager();
+
+  await client.auth.initialize();
+
+  runApp(const BibliothequeApp());
 }
 
-void _initServerpod() async {
-  try {
-    final serverUrl = await getServerUrl();
-    client = Client(serverUrl)
-      ..connectivityMonitor = FlutterConnectivityMonitor();
-      // ..authSessionManager = FlutterAuthSessionManager(); // ← désactivé temporairement
-    // await client.auth.initialize(); // ← désactivé temporairement
-  } catch (e) {
-    debugPrint('Serverpod non disponible (normal en phase design) : $e');
-  }
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class BibliothequeApp extends StatelessWidget {
+  const BibliothequeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Orobity',
-      theme: AppTheme.theme,
-      home: const PublicHomeScreen(),
+    return ChangeNotifierProvider(
+      create: (_) => ThemeController(),
+      child: Consumer<ThemeController>(
+        builder: (context, themeController, _) {
+          return MaterialApp.router(
+            title: 'Bibliothèque Numérique',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: themeController.themeMode,
+            routerConfig: appRouter,
+          );
+        },
+      ),
     );
-  }
+  }   //flutter pub get , flutter run 
 }

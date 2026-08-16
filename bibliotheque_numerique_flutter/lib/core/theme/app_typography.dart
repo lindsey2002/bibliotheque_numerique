@@ -8,59 +8,48 @@ import 'app_colors.dart';
 class AppTypography {
   AppTypography._();
 
-  static TextTheme get textTheme => TextTheme(
-        // Grands titres (ex: hero principal)
-        displayLarge: GoogleFonts.fraunces(
-          fontSize: 40,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
-          height: 1.2,
-        ),
-        displayMedium: GoogleFonts.fraunces(
-          fontSize: 34,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
-          height: 1.25,
-        ),
-
-        // Titres de section / titres de livre
-        headlineSmall: GoogleFonts.fraunces(
-          fontSize: 24,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
-          height: 1.3,
-        ),
-
-        // Corps de texte
-        bodyLarge: GoogleFonts.workSans(
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: AppColors.textPrimary,
-          height: 1.5,
-        ),
-        bodyMedium: GoogleFonts.workSans(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: AppColors.textSecondary,
-          height: 1.5,
-        ),
-        bodySmall: GoogleFonts.workSans(
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: AppColors.textMuted,
-          height: 1.4,
-        ),
-
-        // Boutons / labels / UI
-        labelLarge: GoogleFonts.workSans(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
-        ),
-        labelMedium: GoogleFonts.workSans(
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
-        ),
+  static TextTheme get dark => _buildTextTheme(
+        primary: AppColors.textPrimary,
+        secondary: AppColors.textSecondary,
+        muted: AppColors.textMuted,
       );
+
+  static TextTheme get light => _buildTextTheme(
+        primary: AppColorsLight.textPrimary,
+        secondary: AppColorsLight.textSecondary,
+        muted: AppColorsLight.textMuted,
+      );
+
+  static TextTheme _buildTextTheme({
+    required Color primary,
+    required Color secondary,
+    required Color muted,
+  }) {
+    return TextTheme(
+      displayLarge: GoogleFonts.fraunces(
+        fontSize: 40, fontWeight: FontWeight.w500, color: primary, height: 1.2,
+      ),
+      displayMedium: GoogleFonts.fraunces(
+        fontSize: 34, fontWeight: FontWeight.w500, color: primary, height: 1.25,
+      ),
+      headlineSmall: GoogleFonts.fraunces(
+        fontSize: 24, fontWeight: FontWeight.w500, color: primary, height: 1.3,
+      ),
+      bodyLarge: GoogleFonts.workSans(
+        fontSize: 16, fontWeight: FontWeight.w400, color: primary, height: 1.5,
+      ),
+      bodyMedium: GoogleFonts.workSans(
+        fontSize: 14, fontWeight: FontWeight.w400, color: secondary, height: 1.5,
+      ),
+      bodySmall: GoogleFonts.workSans(
+        fontSize: 12, fontWeight: FontWeight.w400, color: muted, height: 1.4,
+      ),
+      labelLarge: GoogleFonts.workSans(
+        fontSize: 15, fontWeight: FontWeight.w500, color: primary,
+      ),
+      labelMedium: GoogleFonts.workSans(
+        fontSize: 12, fontWeight: FontWeight.w500, color: primary,
+      ),
+    );
+  }
 }

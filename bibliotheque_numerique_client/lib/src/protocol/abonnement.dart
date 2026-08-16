@@ -22,6 +22,7 @@ abstract class Abonnement implements _i1.SerializableModel {
     required this.prix,
     bool? essaiPremiumActif,
     this.dateFinEssaiPremium,
+    this.dateProchainPaiement,
     required this.lecteurId,
   }) : dateDebut = dateDebut ?? DateTime.now(),
        essaiPremiumActif = essaiPremiumActif ?? false;
@@ -34,6 +35,7 @@ abstract class Abonnement implements _i1.SerializableModel {
     required double prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     required int lecteurId,
   }) = _AbonnementImpl;
 
@@ -58,6 +60,11 @@ abstract class Abonnement implements _i1.SerializableModel {
           : _i1.DateTimeJsonExtension.fromJson(
               jsonSerialization['dateFinEssaiPremium'],
             ),
+      dateProchainPaiement: jsonSerialization['dateProchainPaiement'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['dateProchainPaiement'],
+            ),
       lecteurId: jsonSerialization['lecteurId'] as int,
     );
   }
@@ -79,6 +86,8 @@ abstract class Abonnement implements _i1.SerializableModel {
 
   DateTime? dateFinEssaiPremium;
 
+  DateTime? dateProchainPaiement;
+
   int lecteurId;
 
   /// Returns a shallow copy of this [Abonnement]
@@ -92,6 +101,7 @@ abstract class Abonnement implements _i1.SerializableModel {
     double? prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     int? lecteurId,
   });
   @override
@@ -106,6 +116,8 @@ abstract class Abonnement implements _i1.SerializableModel {
       'essaiPremiumActif': essaiPremiumActif,
       if (dateFinEssaiPremium != null)
         'dateFinEssaiPremium': dateFinEssaiPremium?.toJson(),
+      if (dateProchainPaiement != null)
+        'dateProchainPaiement': dateProchainPaiement?.toJson(),
       'lecteurId': lecteurId,
     };
   }
@@ -127,6 +139,7 @@ class _AbonnementImpl extends Abonnement {
     required double prix,
     bool? essaiPremiumActif,
     DateTime? dateFinEssaiPremium,
+    DateTime? dateProchainPaiement,
     required int lecteurId,
   }) : super._(
          id: id,
@@ -136,6 +149,7 @@ class _AbonnementImpl extends Abonnement {
          prix: prix,
          essaiPremiumActif: essaiPremiumActif,
          dateFinEssaiPremium: dateFinEssaiPremium,
+         dateProchainPaiement: dateProchainPaiement,
          lecteurId: lecteurId,
        );
 
@@ -151,6 +165,7 @@ class _AbonnementImpl extends Abonnement {
     double? prix,
     bool? essaiPremiumActif,
     Object? dateFinEssaiPremium = _Undefined,
+    Object? dateProchainPaiement = _Undefined,
     int? lecteurId,
   }) {
     return Abonnement(
@@ -163,6 +178,9 @@ class _AbonnementImpl extends Abonnement {
       dateFinEssaiPremium: dateFinEssaiPremium is DateTime?
           ? dateFinEssaiPremium
           : this.dateFinEssaiPremium,
+      dateProchainPaiement: dateProchainPaiement is DateTime?
+          ? dateProchainPaiement
+          : this.dateProchainPaiement,
       lecteurId: lecteurId ?? this.lecteurId,
     );
   }

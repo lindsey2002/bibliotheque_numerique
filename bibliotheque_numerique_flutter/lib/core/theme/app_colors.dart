@@ -26,3 +26,26 @@ class AppColors {
 
   static const Color draft = Color(0xFF1B2129);
 }
+
+/// Variante claire de la palette — même identité (bleu nuit → ivoire, accent sauge/corail conservé).
+class AppColorsLight {
+  AppColorsLight._();
+
+  static const Color background = Color(0xFFFAF9F6);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color surfaceElevated = Color(0xFFF3F1EC);
+  static const Color border = Color(0xFFE3E0DA);
+
+  static const Color accent = Color(0xFFFF6A4D); // même corail, fonctionne sur clair
+  static const Color accentOn = Color(0xFFFFFFFF);
+
+  static const Color textPrimary = Color(0xFF14181D);
+  static const Color textSecondary = Color(0xFF565F6B);
+  static const Color textMuted = Color(0xFF8A9099);
+
+  static const Color success = Color(0xFFFF6A4D);
+  static const Color warning = Color(0xFFB5790A);
+  static const Color error = Color(0xFFC23B2C);
+
+  static const Color draft = Color(0xFFE3E0DA);
+}

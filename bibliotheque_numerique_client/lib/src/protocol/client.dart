@@ -45,13 +45,15 @@ import 'package:bibliotheque_numerique_client/src/protocol/lecture.dart'
     as _i19;
 import 'package:bibliotheque_numerique_client/src/protocol/modeaudio.dart'
     as _i20;
-import 'package:bibliotheque_numerique_client/src/protocol/paiement.dart'
+import 'package:bibliotheque_numerique_client/src/protocol/notification.dart'
     as _i21;
-import 'package:bibliotheque_numerique_client/src/protocol/utilisateur.dart'
+import 'package:bibliotheque_numerique_client/src/protocol/paiement.dart'
     as _i22;
-import 'package:bibliotheque_numerique_client/src/protocol/versement.dart'
+import 'package:bibliotheque_numerique_client/src/protocol/utilisateur.dart'
     as _i23;
-import 'protocol.dart' as _i24;
+import 'package:bibliotheque_numerique_client/src/protocol/versement.dart'
+    as _i24;
+import 'protocol.dart' as _i25;
 
 /// By extending [EmailIdpBaseEndpoint], the email identity provider endpoints
 /// are made available on the server and enable the corresponding sign-in widget
@@ -365,6 +367,18 @@ class EndpointAvis extends _i2.EndpointRef {
       'commentaire': commentaire,
     },
   );
+
+  _i3.Future<_i9.Avis> repondre(
+    int avisId,
+    String reponse,
+  ) => caller.callServerEndpoint<_i9.Avis>(
+    'avis',
+    'repondre',
+    {
+      'avisId': avisId,
+      'reponse': reponse,
+    },
+  );
 }
 
 /// {@category Endpoint}
@@ -655,16 +669,49 @@ class EndpointLivre extends _i2.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointNotification extends _i2.EndpointRef {
+  EndpointNotification(_i2.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'notification';
+
+  _i3.Future<List<_i21.Notification>> mesNotifications() =>
+      caller.callServerEndpoint<List<_i21.Notification>>(
+        'notification',
+        'mesNotifications',
+        {},
+      );
+
+  _i3.Future<void> marquerCommeLue(int notificationId) =>
+      caller.callServerEndpoint<void>(
+        'notification',
+        'marquerCommeLue',
+        {'notificationId': notificationId},
+      );
+
+  _i3.Stream<_i21.Notification> ecouter() =>
+      caller.callStreamingServerEndpoint<
+        _i3.Stream<_i21.Notification>,
+        _i21.Notification
+      >(
+        'notification',
+        'ecouter',
+        {},
+        {},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointPaiement extends _i2.EndpointRef {
   EndpointPaiement(_i2.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'paiement';
 
-  _i3.Future<_i21.Paiement> effectuer(
+  _i3.Future<_i22.Paiement> effectuer(
     int abonnementId,
     String mode,
-  ) => caller.callServerEndpoint<_i21.Paiement>(
+  ) => caller.callServerEndpoint<_i22.Paiement>(
     'paiement',
     'effectuer',
     {
@@ -681,11 +728,11 @@ class EndpointProfil extends _i2.EndpointRef {
   @override
   String get name => 'profil';
 
-  _i3.Future<_i22.Lecteur> creerProfilLecteur({
+  _i3.Future<_i23.Lecteur> creerProfilLecteur({
     required String nom,
     required String email,
     String? languePreferee,
-  }) => caller.callServerEndpoint<_i22.Lecteur>(
+  }) => caller.callServerEndpoint<_i23.Lecteur>(
     'profil',
     'creerProfilLecteur',
     {
@@ -695,12 +742,12 @@ class EndpointProfil extends _i2.EndpointRef {
     },
   );
 
-  _i3.Future<_i22.Auteur> creerProfilAuteur({
+  _i3.Future<_i23.Auteur> creerProfilAuteur({
     required String nom,
     required String email,
     String? biographie,
     String? languePreferee,
-  }) => caller.callServerEndpoint<_i22.Auteur>(
+  }) => caller.callServerEndpoint<_i23.Auteur>(
     'profil',
     'creerProfilAuteur',
     {
@@ -715,6 +762,18 @@ class EndpointProfil extends _i2.EndpointRef {
     'profil',
     'obtenirMonRole',
     {},
+  );
+
+  _i3.Future<_i23.SuperAdmin> creerProfilSuperAdminDEV({
+    required String nom,
+    required String email,
+  }) => caller.callServerEndpoint<_i23.SuperAdmin>(
+    'profil',
+    'creerProfilSuperAdminDEV',
+    {
+      'nom': nom,
+      'email': email,
+    },
   );
 }
 
@@ -740,15 +799,15 @@ class EndpointVersement extends _i2.EndpointRef {
   @override
   String get name => 'versement';
 
-  _i3.Future<List<_i23.Versement>> genererPourLeMois(String moisAnnee) =>
-      caller.callServerEndpoint<List<_i23.Versement>>(
+  _i3.Future<List<_i24.Versement>> genererPourLeMois(String moisAnnee) =>
+      caller.callServerEndpoint<List<_i24.Versement>>(
         'versement',
         'genererPourLeMois',
         {'moisAnnee': moisAnnee},
       );
 
-  _i3.Future<List<_i23.Versement>> mesVersements() =>
-      caller.callServerEndpoint<List<_i23.Versement>>(
+  _i3.Future<List<_i24.Versement>> mesVersements() =>
+      caller.callServerEndpoint<List<_i24.Versement>>(
         'versement',
         'mesVersements',
         {},
@@ -786,7 +845,7 @@ class Client extends _i2.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i24.Protocol(),
+         _i25.Protocol(),
          securityContext: securityContext,
          streamingConnectionTimeout: streamingConnectionTimeout,
          connectionTimeout: connectionTimeout,
@@ -810,6 +869,7 @@ class Client extends _i2.ServerpodClientShared {
     langue = EndpointLangue(this);
     lecture = EndpointLecture(this);
     livre = EndpointLivre(this);
+    notification = EndpointNotification(this);
     paiement = EndpointPaiement(this);
     profil = EndpointProfil(this);
     statistiques = EndpointStatistiques(this);
@@ -847,6 +907,8 @@ class Client extends _i2.ServerpodClientShared {
 
   late final EndpointLivre livre;
 
+  late final EndpointNotification notification;
+
   late final EndpointPaiement paiement;
 
   late final EndpointProfil profil;
@@ -874,6 +936,7 @@ class Client extends _i2.ServerpodClientShared {
     'langue': langue,
     'lecture': lecture,
     'livre': livre,
+    'notification': notification,
     'paiement': paiement,
     'profil': profil,
     'statistiques': statistiques,

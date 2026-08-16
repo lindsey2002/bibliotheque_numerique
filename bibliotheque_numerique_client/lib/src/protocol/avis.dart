@@ -18,6 +18,8 @@ abstract class Avis implements _i1.SerializableModel {
     required this.note,
     this.commentaire,
     DateTime? dateAvis,
+    this.reponseAuteur,
+    this.dateReponseAuteur,
     required this.lecteurId,
     required this.livreId,
   }) : dateAvis = dateAvis ?? DateTime.now();
@@ -27,6 +29,8 @@ abstract class Avis implements _i1.SerializableModel {
     required int note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     required int lecteurId,
     required int livreId,
   }) = _AvisImpl;
@@ -39,6 +43,12 @@ abstract class Avis implements _i1.SerializableModel {
       dateAvis: jsonSerialization['dateAvis'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['dateAvis']),
+      reponseAuteur: jsonSerialization['reponseAuteur'] as String?,
+      dateReponseAuteur: jsonSerialization['dateReponseAuteur'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['dateReponseAuteur'],
+            ),
       lecteurId: jsonSerialization['lecteurId'] as int,
       livreId: jsonSerialization['livreId'] as int,
     );
@@ -55,6 +65,10 @@ abstract class Avis implements _i1.SerializableModel {
 
   DateTime dateAvis;
 
+  String? reponseAuteur;
+
+  DateTime? dateReponseAuteur;
+
   int lecteurId;
 
   int livreId;
@@ -67,6 +81,8 @@ abstract class Avis implements _i1.SerializableModel {
     int? note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     int? lecteurId,
     int? livreId,
   });
@@ -78,6 +94,9 @@ abstract class Avis implements _i1.SerializableModel {
       'note': note,
       if (commentaire != null) 'commentaire': commentaire,
       'dateAvis': dateAvis.toJson(),
+      if (reponseAuteur != null) 'reponseAuteur': reponseAuteur,
+      if (dateReponseAuteur != null)
+        'dateReponseAuteur': dateReponseAuteur?.toJson(),
       'lecteurId': lecteurId,
       'livreId': livreId,
     };
@@ -97,6 +116,8 @@ class _AvisImpl extends Avis {
     required int note,
     String? commentaire,
     DateTime? dateAvis,
+    String? reponseAuteur,
+    DateTime? dateReponseAuteur,
     required int lecteurId,
     required int livreId,
   }) : super._(
@@ -104,6 +125,8 @@ class _AvisImpl extends Avis {
          note: note,
          commentaire: commentaire,
          dateAvis: dateAvis,
+         reponseAuteur: reponseAuteur,
+         dateReponseAuteur: dateReponseAuteur,
          lecteurId: lecteurId,
          livreId: livreId,
        );
@@ -117,6 +140,8 @@ class _AvisImpl extends Avis {
     int? note,
     Object? commentaire = _Undefined,
     DateTime? dateAvis,
+    Object? reponseAuteur = _Undefined,
+    Object? dateReponseAuteur = _Undefined,
     int? lecteurId,
     int? livreId,
   }) {
@@ -125,6 +150,12 @@ class _AvisImpl extends Avis {
       note: note ?? this.note,
       commentaire: commentaire is String? ? commentaire : this.commentaire,
       dateAvis: dateAvis ?? this.dateAvis,
+      reponseAuteur: reponseAuteur is String?
+          ? reponseAuteur
+          : this.reponseAuteur,
+      dateReponseAuteur: dateReponseAuteur is DateTime?
+          ? dateReponseAuteur
+          : this.dateReponseAuteur,
       lecteurId: lecteurId ?? this.lecteurId,
       livreId: livreId ?? this.livreId,
     );
